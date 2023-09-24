@@ -13,16 +13,17 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 
   let goto = "goto=";
-  let result = [];
+  let result = "";
   products.forEach(function (p) {
     let wholeUrl = p.product.url;
     let startIndex = wholeUrl.indexOf(goto);
     if (startIndex >= 0) {
       let encodedUrl = wholeUrl.substring(startIndex + 5); // 截取字符串
       let decodedUrl = decodeURIComponent(encodedUrl); // 解码URL  
-      result.push(decodedUrl);
+      result = result + "\n" + decodedUrl;
     }
   });
+
   if (result.length > 0) {
     console.log(result);
   }
